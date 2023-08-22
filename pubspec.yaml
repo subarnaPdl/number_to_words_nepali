@@ -1,20 +1,12 @@
 name: number_to_words_nepali
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+description: A Dart library to convert numbers to their Nepali word representations.
+version: 1.0.0
+repository: https://github.com/subarnaPdl/number_to_words_nepali
+homepage: https://subarnapdl.com.np
 
 environment:
   sdk: '>=2.19.5 <3.0.0'
-  flutter: ">=1.17.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^2.0.0
   test: ^1.22.0
-
-flutter:
