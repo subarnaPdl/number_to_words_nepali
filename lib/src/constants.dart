@@ -1,8 +1,10 @@
+/// A utility class containing constant lists for converting numbers to their word representations in Nepali and English languages.
 class Constants {
-  const Constants._();
+  const Constants._(); // Private constructor to prevent instantiation.
 
-  //* Nepali
-
+  /// Nepali units in words from 0 to 99.
+  ///
+  /// This list provides the word representation of numbers from 0 to 99 in the Nepali language.
   static const List<String> unitsNepali = [
     "",
     "एक",
@@ -106,6 +108,9 @@ class Constants {
     "उनान्सय",
   ];
 
+  /// Nepali count names.
+  ///
+  /// This list provides the names for counting units in Nepali, such as "सय" (hundred), "हजार" (thousand), etc.
   static const List<String> countsNepali = [
     "",
     "सय",
@@ -119,8 +124,9 @@ class Constants {
     "शंख",
   ];
 
-  //* English
-
+  /// English units in words from 0 to 19.
+  ///
+  /// This list provides the word representation of numbers from 0 to 19 in the English language.
   static const List<String> unitsEnglish = [
     "",
     "one",
@@ -144,6 +150,9 @@ class Constants {
     "nineteen"
   ];
 
+  /// English tens in words from 0 to 90.
+  ///
+  /// This list provides the word representation of tens multiples (10, 20, 30, ..., 90) in the English language.
   static const List<String> tensEnglish = [
     "",
     "ten",
@@ -157,6 +166,9 @@ class Constants {
     "ninety"
   ];
 
+  /// English count names.
+  ///
+  /// This list provides the names for counting units in English, such as "hundred," "thousand," etc.
   static const List<String> countsEnglish = [
     "",
     "hundred",

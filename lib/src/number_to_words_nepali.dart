@@ -1,13 +1,23 @@
 import 'package:number_to_words_nepali/number_to_words_nepali.dart';
 import 'package:number_to_words_nepali/src/constants.dart';
 
+/// A class to convert numbers to their Nepali word representations.
 class NumberToWordsNepali {
+  /// Specifies the language for number to words conversion
   final Language language;
 
+  /// Creates an instance of the [NumberToWordsNepali] class.
+  ///
+  /// The [language] parameter specifies the language for the number-to-words conversion.
+  ///
+  /// If [language] is not provided, the default language is set to [Language.nepali].
   NumberToWordsNepali({
     this.language = Language.nepali,
   });
 
+  /// Converts a number to its word representation in Nepali.
+  ///
+  /// Takes an [int] number as input and returns its corresponding words in Nepali.
   String convertNumberToWordsNepali(int number) {
     String numberInWords = '';
     String commaFormattedNumber = _formatWithComma(number);
@@ -46,6 +56,7 @@ class NumberToWordsNepali {
     return numberInWords.trim();
   }
 
+  /// Formats the number with commas (e.g., 1,00,00,000) for easier conversion.
   String _formatWithComma(int number) {
     String numberString = number.toString();
     String formattedNumber = '';
@@ -65,6 +76,7 @@ class NumberToWordsNepali {
     return formattedNumber;
   }
 
+  /// Returns the word representation for a unit number in the specified language.
   String _wordForUnitNumber(int number) {
     String numberInWords = '';
 

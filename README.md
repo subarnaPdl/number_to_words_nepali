@@ -7,7 +7,7 @@ A Dart library to convert numbers to their Nepali word representations.
 In your pubspec.yaml
 ```yaml
 dependencies:
-  number_to_words_nepali: ^1.0.0
+  number_to_words_nepali: ^1.0.1
 ```
 
 ## Usage
