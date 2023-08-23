@@ -15,10 +15,10 @@ dependencies:
 ```dart
 import 'package:number_to_words_nepali/number_to_words_nepali.dart';
 
-print('123456789: ${NumberToWordsNepali().convertNumberToWordsNepali(123456789)}');
+print('123456789: ${NumberToWordsNepali.convertNumberToWordsNepali(123456789)}');
 // 123456789: बाह्र करोड चौतीस लाख छपन्न हजार सात सय उनान्नब्बे
 
-print('123456789: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(123456789)}');
+print('123456789: ${NumberToWordsNepali.convertNumberToWordsNepali(123456789,language: Language.english)}');
 // 123456789: twelve crore thirty-four lakh fifty-six thousand seven hundred eighty-nine
 ```
 
