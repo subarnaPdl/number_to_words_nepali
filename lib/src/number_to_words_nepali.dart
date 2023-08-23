@@ -1,24 +1,17 @@
-import 'package:number_to_words_nepali/number_to_words_nepali.dart';
 import 'package:number_to_words_nepali/src/constants.dart';
+import 'package:number_to_words_nepali/src/language.dart';
 
 /// A class to convert numbers to their Nepali word representations.
 class NumberToWordsNepali {
-  /// Specifies the language for number to words conversion
-  final Language language;
-
-  /// Creates an instance of the [NumberToWordsNepali] class.
+  /// Static method to a number to its word representation in Nepali.
+  ///
+  /// Takes an [int] number as input and returns its corresponding words in Nepali.
   ///
   /// The [language] parameter specifies the language for the number-to-words conversion.
   ///
   /// If [language] is not provided, the default language is set to [Language.nepali].
-  NumberToWordsNepali({
-    this.language = Language.nepali,
-  });
-
-  /// Converts a number to its word representation in Nepali.
-  ///
-  /// Takes an [int] number as input and returns its corresponding words in Nepali.
-  String convertNumberToWordsNepali(int number) {
+  static String convertNumberToWordsNepali(int number,
+      {Language language = Language.nepali}) {
     String numberInWords = '';
     String commaFormattedNumber = _formatWithComma(number);
     List<String> digitGroups = commaFormattedNumber.split(',');
@@ -33,7 +26,7 @@ class NumberToWordsNepali {
       if (digits[0] == '0') digits = digits.substring(1);
 
       digits =
-          '${_wordForUnitNumber(int.parse(digits))} ${counts[digitGroups.length - i]} ';
+          '${_wordForUnitNumber(int.parse(digits), language)} ${counts[digitGroups.length - i]} ';
 
       numberInWords += digits;
     }
@@ -43,21 +36,21 @@ class NumberToWordsNepali {
     if (hundredDigits.length == 3) {
       if (hundredDigits[0] != '0') {
         numberInWords +=
-            '${_wordForUnitNumber(int.parse(hundredDigits[0]))} ${counts[1]} ';
+            '${_wordForUnitNumber(int.parse(hundredDigits[0]), language)} ${counts[1]} ';
       }
       hundredDigits = hundredDigits.substring(1);
     }
 
     if (hundredDigits != '00') {
       if (hundredDigits[0] == '0') hundredDigits = hundredDigits.substring(1);
-      numberInWords += _wordForUnitNumber(int.parse(hundredDigits));
+      numberInWords += _wordForUnitNumber(int.parse(hundredDigits), language);
     }
 
     return numberInWords.trim();
   }
 
   /// Formats the number with commas (e.g., 1,00,00,000) for easier conversion.
-  String _formatWithComma(int number) {
+  static String _formatWithComma(int number) {
     String numberString = number.toString();
     String formattedNumber = '';
     int count = 0;
@@ -77,7 +70,7 @@ class NumberToWordsNepali {
   }
 
   /// Returns the word representation for a unit number in the specified language.
-  String _wordForUnitNumber(int number) {
+  static String _wordForUnitNumber(int number, Language language) {
     String numberInWords = '';
 
     if (language == Language.nepali) {
