@@ -5,7 +5,7 @@ repository: https://github.com/subarnaPdl/number_to_words_nepali
 homepage: https://subarnapdl.com.np
 
 environment:
-  sdk: '>=2.19.5 <4.0.0'
+  sdk: '>=2.19.0 <4.0.0'
 
 dev_dependencies:
   flutter_lints: ^2.0.0
