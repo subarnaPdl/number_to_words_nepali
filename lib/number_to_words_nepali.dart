@@ -4,14 +4,13 @@
 /// words in the Nepali language.
 library number_to_words_nepali;
 
-/// It exports two main components: `number_to_words_nepali.dart` and `language.dart`.
+/// It exports two main components: `number_to_words_nepali.dart` and `enums.dart`.
 ///
-/// The `number_to_words_nepali.dart` file contains the `NumberToWordsNepali` class, which
-/// implements the conversion logic. This class can be used to convert integer numbers into
-/// their Nepali word equivalents.
+/// - `number_to_words_nepali.dart`: Contains the core functionality for converting
+///   numbers to words in Nepali.
 ///
-/// The `language.dart` file exports the `Language` enumeration, which defines the supported
-/// languages for number-to-words conversion. The enum includes values for English and Nepali,
-/// allowing users to specify the language in which they want the conversion to be performed.
+/// - `enums.dart`: This library exports a set of enums used in the package, including
+///   the enumeration of languages and letter cases. These enums are useful for
+///   configuring and customizing the conversion process.
 export 'src/number_to_words_nepali.dart';
-export 'src/language.dart';
+export 'src/enums/enums.dart';

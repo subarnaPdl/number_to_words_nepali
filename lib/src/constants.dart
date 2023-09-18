@@ -6,7 +6,7 @@ class Constants {
   ///
   /// This list provides the word representation of numbers from 0 to 99 in the Nepali language.
   static const List<String> unitsNepali = [
-    "",
+    "शून्य",
     "एक",
     "दुई",
     "तीन",
@@ -128,7 +128,7 @@ class Constants {
   ///
   /// This list provides the word representation of numbers from 0 to 19 in the English language.
   static const List<String> unitsEnglish = [
-    "",
+    "zero",
     "one",
     "two",
     "three",

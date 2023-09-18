@@ -1,26 +1,123 @@
-import 'package:number_to_words_nepali/number_to_words_nepali.dart';
 import 'package:number_to_words_nepali/src/constants.dart';
+import 'package:number_to_words_nepali/src/enums/enums.dart';
 
 /// A class to convert numbers to their Nepali word representations.
 class NumberToWordsNepali {
-  /// Specifies the language for number to words conversion
+  /// Specifies the language for number to words conversion.
   final Language language;
+
+  /// Specifies the letter case for the converted words.
+  final LetterCase letterCase;
+
+  /// Specifies whether the conversion should include monetary units (rupees and paisa).
+  final bool isMonetary;
 
   /// Creates an instance of the [NumberToWordsNepali] class.
   ///
-  /// The [language] parameter specifies the language for the number-to-words conversion.
-  ///
-  /// If [language] is not provided, the default language is set to [Language.nepali].
+  /// - [language]: The target language for the conversion. Default is [Language.nepali].
+  /// - [letterCase]: The desired letter case for the converted words. Default is  [LetterCase.lowerCase].
+  /// - [isMonetary]: Indicates if the conversion is for monetary values. Default is `false`.
   NumberToWordsNepali({
     this.language = Language.nepali,
+    this.letterCase = LetterCase.lowerCase,
+    this.isMonetary = false,
   });
 
-  /// Converts a number to its word representation in Nepali.
+  /// Converts a number to its Nepali word representation.
   ///
-  /// Takes an [int] number as input and returns its corresponding words in Nepali.
-  String convertNumberToWordsNepali(int number) {
+  /// The [number] parameter can be of type int, double, or String.
+  ///
+  /// When passing a double number, please be aware of Dart double precision.
+  /// To maintain precision, you can pass the double number as a string.
+  ///
+  /// The maximum length of the integral part accepted is 18 digits.
+  String convertNumberToWordsNepali(Object number) {
+    if (number == '') {
+      throw RangeError('The number is empty. Please provide a valid number.');
+    }
+    if (number is! int && number is! double && number is! String) {
+      throw ArgumentError('The number must be of type int, double, or string.');
+    }
+
+    number = number.toString().replaceAll(RegExp(r'^-+|,| '), '');
+    if (number.isEmpty || !RegExp(r'^(?=.*\d)[\d.]+$').hasMatch(number)) {
+      throw ArgumentError(
+          'The number is invalid. Please provide a valid number.');
+    }
+
+    List<String> parts = number.toString().split('.');
+
+    String integerPart = parts[0].replaceAll(RegExp(r'^0*(?!$)'), '');
+    String integerWords = '';
+    if (integerPart.isNotEmpty) {
+      integerWords = _wordForIntegerNumber(integerPart);
+    }
+
+    String fractionalPart = parts.length == 1 ? '' : parts[1];
+    if (isMonetary) {
+      fractionalPart = fractionalPart.padRight(2, '0').substring(0, 2);
+      fractionalPart = fractionalPart.replaceAll(RegExp(r'^0+'), '');
+    } else {
+      fractionalPart = fractionalPart.replaceAll(RegExp(r'0*$'), '');
+    }
+    String fractionalWords = '';
+    if (fractionalPart.isNotEmpty) {
+      if (isMonetary) {
+        fractionalWords = _wordForUnitNumber(fractionalPart);
+      } else {
+        for (int i = 0; i < fractionalPart.length; i++) {
+          fractionalWords += _wordForUnitNumber(fractionalPart[i]);
+          fractionalWords += ' ';
+        }
+        fractionalWords = fractionalWords.trim();
+      }
+    }
+
+    String numberInWords = '';
+
+    if (isMonetary) {
+      if (integerWords.isNotEmpty && integerPart != '0') {
+        numberInWords += integerWords;
+        numberInWords += language == Language.nepali ? ' रुपैंया' : ' rupees';
+      }
+      if (fractionalWords.isNotEmpty && fractionalPart != '0') {
+        if (numberInWords.isNotEmpty) {
+          numberInWords += language == Language.nepali ? ', ' : ' and ';
+        }
+        numberInWords += fractionalWords;
+        numberInWords += language == Language.nepali ? ' पैसा' : ' paisa';
+      }
+      if (numberInWords.isEmpty) {
+        numberInWords = _wordForUnitNumber('0');
+        numberInWords += language == Language.nepali ? ' रुपैंया' : ' rupees';
+      }
+    } else {
+      numberInWords = integerWords;
+      if (fractionalWords.isNotEmpty) {
+        numberInWords += language == Language.nepali ? ' दशमलव ' : ' point ';
+        numberInWords += fractionalWords;
+      }
+      if (numberInWords.isEmpty) {
+        numberInWords = _wordForUnitNumber('0');
+      }
+    }
+
+    return _convertCase(numberInWords.trim());
+  }
+
+  /// Converts the integer part of the number to words.
+  String _wordForIntegerNumber(String number) {
+    if (number.length > 18) {
+      throw RangeError(
+          'The number is too large. Please provide a number within 18 characters.');
+    }
+
+    if (number.isEmpty) return '';
+    if (number == '0') return _wordForUnitNumber('0');
+
     String numberInWords = '';
     String commaFormattedNumber = _formatWithComma(number);
+
     List<String> digitGroups = commaFormattedNumber.split(',');
 
     List<String> counts = language == Language.nepali
@@ -33,7 +130,7 @@ class NumberToWordsNepali {
       if (digits[0] == '0') digits = digits.substring(1);
 
       digits =
-          '${_wordForUnitNumber(int.parse(digits))} ${counts[digitGroups.length - i]} ';
+          '${_wordForUnitNumber(digits)} ${counts[digitGroups.length - i]} ';
 
       numberInWords += digits;
     }
@@ -43,57 +140,80 @@ class NumberToWordsNepali {
     if (hundredDigits.length == 3) {
       if (hundredDigits[0] != '0') {
         numberInWords +=
-            '${_wordForUnitNumber(int.parse(hundredDigits[0]))} ${counts[1]} ';
+            '${_wordForUnitNumber(hundredDigits[0])} ${counts[1]} ';
       }
       hundredDigits = hundredDigits.substring(1);
     }
 
     if (hundredDigits != '00') {
       if (hundredDigits[0] == '0') hundredDigits = hundredDigits.substring(1);
-      numberInWords += _wordForUnitNumber(int.parse(hundredDigits));
+      numberInWords += _wordForUnitNumber(hundredDigits);
     }
 
     return numberInWords.trim();
   }
 
+  /// Converts the unit number to words in the specified language.
+  String _wordForUnitNumber(String number) {
+    int num = int.parse(number);
+    String numberInWords = '';
+
+    if (language == Language.nepali) {
+      numberInWords = Constants.unitsNepali[num];
+    } else {
+      if (num < 20) {
+        numberInWords = Constants.unitsEnglish[num];
+      } else if (num % 10 == 0) {
+        numberInWords = Constants.tensEnglish[num % 10];
+      } else {
+        numberInWords = Constants.tensEnglish[(num ~/ 10).toInt()];
+        numberInWords += '-';
+        numberInWords += Constants.unitsEnglish[num % 10];
+      }
+    }
+
+    return numberInWords;
+  }
+
   /// Formats the number with commas (e.g., 1,00,00,000) for easier conversion.
-  String _formatWithComma(int number) {
-    String numberString = number.toString();
+  String _formatWithComma(String number) {
     String formattedNumber = '';
     int count = 0;
     bool isThousandDone = false;
 
-    for (int i = numberString.length - 1; i >= 0; i--) {
+    for (int i = number.length - 1; i >= 0; i--) {
       if ((isThousandDone && count == 2) || (!isThousandDone && count == 3)) {
         formattedNumber = ',$formattedNumber';
         count = 0;
         isThousandDone = true;
       }
-      formattedNumber = numberString[i] + formattedNumber;
+      formattedNumber = number[i] + formattedNumber;
       count++;
     }
 
     return formattedNumber;
   }
 
-  /// Returns the word representation for a unit number in the specified language.
-  String _wordForUnitNumber(int number) {
-    String numberInWords = '';
-
-    if (language == Language.nepali) {
-      numberInWords = Constants.unitsNepali[number];
-    } else {
-      if (number < 20) {
-        numberInWords = Constants.unitsEnglish[number];
-      } else if (number % 10 == 0) {
-        numberInWords = Constants.tensEnglish[number % 10];
-      } else {
-        numberInWords = Constants.tensEnglish[(number ~/ 10).toInt()];
-        numberInWords += '-';
-        numberInWords += Constants.unitsEnglish[number % 10];
-      }
+  /// Converts the letter case.
+  String _convertCase(String numberInWords) {
+    switch (letterCase) {
+      case LetterCase.lowerCase:
+        return numberInWords.toLowerCase();
+      case LetterCase.upperCase:
+        return numberInWords.toUpperCase();
+      case LetterCase.titleCase:
+        return numberInWords.split(' ').map((word) {
+          if (word.isNotEmpty) {
+            return word[0].toUpperCase() + word.substring(1).toLowerCase();
+          } else {
+            return '';
+          }
+        }).join(' ');
+      case LetterCase.sentenceCase:
+        return numberInWords.trimLeft()[0].toUpperCase() +
+            numberInWords.trimLeft().substring(1).toLowerCase();
+      default:
+        return numberInWords;
     }
-
-    return numberInWords;
   }
 }

@@ -1,43 +1,66 @@
 import 'package:number_to_words_nepali/number_to_words_nepali.dart';
 
 void main() {
-  //* Nepali language
+  //
+  //* Nepali language *//
+  //
   print('10000: ${NumberToWordsNepali().convertNumberToWordsNepali(10000)}');
-  // 10000: दस हजार
-
-  print('100001: ${NumberToWordsNepali().convertNumberToWordsNepali(100001)}');
-  // 100001: एक लाख एक
+  // 10000: दश हजार
 
   print(
-      '11111111: ${NumberToWordsNepali().convertNumberToWordsNepali(11111111)}');
-  // 11111111: एक करोड एघार लाख एघार हजार एक सय एघार
+      '"100001": ${NumberToWordsNepali().convertNumberToWordsNepali("100001")}');
+  // "100001": एक लाख एक
 
   print(
-      '123456789: ${NumberToWordsNepali().convertNumberToWordsNepali(123456789)}');
-  // 123456789: बाह्र करोड चौतीस लाख छपन्न हजार सात सय उनान्नब्बे
+      '111111.11: ${NumberToWordsNepali().convertNumberToWordsNepali(111111.11)}');
+  // 111111.11: एक लाख एघार हजार एक सय एघार दशमलव एक एक
 
-  print(
-      '999999999999999999: ${NumberToWordsNepali().convertNumberToWordsNepali(999999999999999999)}');
-  // 999999999999999999: नौ शंख उनान्सय पद्म उनान्सय नील उनान्सय खरब उनान्सय अरब उनान्सय करोड उनान्सय लाख उनान्सय हजार नौ सय उनान्सय
+  //
+  //* Nepali language monetary *//
+  //
+  print('1000: ${NumberToWordsNepali(
+    isMonetary: true,
+  ).convertNumberToWordsNepali(1000)}');
+  // 1000: एक हजार रुपैंया
 
-  //* English language
-  print(
-      '10000: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(10000)}');
+  print('"1234567.89": ${NumberToWordsNepali(
+    isMonetary: true,
+  ).convertNumberToWordsNepali("1234567.89")}');
+  // "1234567.89": बाह्र लाख चौँतीस हजार पाँच सय सतसट्ठी रुपैंया, उनान्नब्बे पैसा
+
+  //
+  //* English language *//
+  //
+  print('10000: ${NumberToWordsNepali(
+    language: Language.english,
+  ).convertNumberToWordsNepali(10000)}');
   // 10000: ten thousand
 
-  print(
-      '100001: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(100001)}');
-  // 100001: one lakh one
+  print('"100001": ${NumberToWordsNepali(
+    language: Language.english,
+    letterCase: LetterCase.titleCase,
+  ).convertNumberToWordsNepali("100001")}');
+  // "100001": One Lakh One
 
-  print(
-      '11111111: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(11111111)}');
-  // 11111111: one crore eleven lakh eleven thousand one hundred eleven
+  print('111111.11: ${NumberToWordsNepali(
+    language: Language.english,
+    letterCase: LetterCase.sentenceCase,
+  ).convertNumberToWordsNepali(111111.11)}');
+  // 111111.11: One lakh eleven thousand one hundred eleven point one one
 
-  print(
-      '123456789: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(123456789)}');
-  // 123456789: twelve crore thirty-four lakh fifty-six thousand seven hundred eighty-nine
+  //
+  //* English language monetary *//
+  //
+  print('1000: ${NumberToWordsNepali(
+    language: Language.english,
+    isMonetary: true,
+    letterCase: LetterCase.upperCase,
+  ).convertNumberToWordsNepali(1000)}');
+  // 1000: ONE THOUSAND RUPEES
 
-  print(
-      '999999999999999999: ${NumberToWordsNepali(language: Language.english).convertNumberToWordsNepali(999999999999999999)}');
-  // 999999999999999999:  nine shankh ninety-nine padma ninety-nine neel ninety-nine kharab ninety-nine arab ninety-nine crore ninety-nine lakh ninety-nine thousand nine hundred ninety-nine
+  print('"1234567.89": ${NumberToWordsNepali(
+    language: Language.english,
+    isMonetary: true,
+  ).convertNumberToWordsNepali("1234567.89")}');
+  // "1234567.89": twelve lakh thirty-four thousand five hundred sixty-seven rupees and eighty-nine paisa
 }
