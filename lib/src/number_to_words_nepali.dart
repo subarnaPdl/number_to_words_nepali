@@ -163,12 +163,12 @@ class NumberToWordsNepali {
     } else {
       if (num < 20) {
         numberInWords = Constants.unitsEnglish[num];
-      } else if (num % 10 == 0) {
-        numberInWords = Constants.tensEnglish[num % 10];
       } else {
         numberInWords = Constants.tensEnglish[(num ~/ 10).toInt()];
-        numberInWords += '-';
-        numberInWords += Constants.unitsEnglish[num % 10];
+        if (num % 10 != 0) {
+          numberInWords += '-';
+          numberInWords += Constants.unitsEnglish[num % 10];
+        }
       }
     }
 
