@@ -32,18 +32,18 @@ void main() {
   //* English language *//
   //
   print('10000: ${NumberToWordsNepali(
-    language: Language.english,
+    language: NumberToWordsLanguage.english,
   ).convertNumberToWordsNepali(10000)}');
   // 10000: ten thousand
 
   print('"100001": ${NumberToWordsNepali(
-    language: Language.english,
+    language: NumberToWordsLanguage.english,
     letterCase: LetterCase.titleCase,
   ).convertNumberToWordsNepali("100001")}');
   // "100001": One Lakh One
 
   print('111111.11: ${NumberToWordsNepali(
-    language: Language.english,
+    language: NumberToWordsLanguage.english,
     letterCase: LetterCase.sentenceCase,
   ).convertNumberToWordsNepali(111111.11)}');
   // 111111.11: One lakh eleven thousand one hundred eleven point one one
@@ -52,14 +52,14 @@ void main() {
   //* English language monetary *//
   //
   print('1000: ${NumberToWordsNepali(
-    language: Language.english,
+    language: NumberToWordsLanguage.english,
     isMonetary: true,
     letterCase: LetterCase.upperCase,
   ).convertNumberToWordsNepali(1000)}');
   // 1000: ONE THOUSAND RUPEES
 
   print('"1234567.89": ${NumberToWordsNepali(
-    language: Language.english,
+    language: NumberToWordsLanguage.english,
     isMonetary: true,
   ).convertNumberToWordsNepali("1234567.89")}');
   // "1234567.89": twelve lakh thirty-four thousand five hundred sixty-seven rupees and eighty-nine paisa

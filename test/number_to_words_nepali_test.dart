@@ -55,7 +55,7 @@ void main() {
     for (var testNumber in testNumbers.entries) {
       test('${testNumber.key}: ${testNumber.value}', () {
         expect(
-            NumberToWordsNepali(language: Language.english)
+            NumberToWordsNepali(language: NumberToWordsLanguage.english)
                 .convertNumberToWordsNepali(testNumber.key),
             testNumber.value);
       });
@@ -77,7 +77,8 @@ void main() {
     for (var testNumber in testNumbers.entries) {
       test('${testNumber.key}: ${testNumber.value}', () {
         expect(
-            NumberToWordsNepali(language: Language.english, isMonetary: true)
+            NumberToWordsNepali(
+                    language: NumberToWordsLanguage.english, isMonetary: true)
                 .convertNumberToWordsNepali(testNumber.key),
             testNumber.value);
       });

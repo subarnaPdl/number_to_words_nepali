@@ -2,7 +2,7 @@
 ///
 /// This enum defines the languages for which the NumberToWordsNepali class can convert
 /// numbers to their word representations.
-enum Language {
+enum NumberToWordsLanguage {
   /// Represents the English language.
   english,
 

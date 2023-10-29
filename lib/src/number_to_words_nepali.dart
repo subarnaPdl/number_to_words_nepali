@@ -4,7 +4,7 @@ import 'package:number_to_words_nepali/src/enums/enums.dart';
 /// A class to convert numbers to their Nepali word representations.
 class NumberToWordsNepali {
   /// Specifies the language for number to words conversion.
-  final Language language;
+  final NumberToWordsLanguage language;
 
   /// Specifies the letter case for the converted words.
   final LetterCase letterCase;
@@ -14,11 +14,11 @@ class NumberToWordsNepali {
 
   /// Creates an instance of the [NumberToWordsNepali] class.
   ///
-  /// - [language]: The target language for the conversion. Default is [Language.nepali].
+  /// - [language]: The target language for the conversion. Default is [NumberToWordsLanguage.nepali].
   /// - [letterCase]: The desired letter case for the converted words. Default is  [LetterCase.lowerCase].
   /// - [isMonetary]: Indicates if the conversion is for monetary values. Default is `false`.
   NumberToWordsNepali({
-    this.language = Language.nepali,
+    this.language = NumberToWordsLanguage.nepali,
     this.letterCase = LetterCase.lowerCase,
     this.isMonetary = false,
   });
@@ -78,23 +78,28 @@ class NumberToWordsNepali {
     if (isMonetary) {
       if (integerWords.isNotEmpty && integerPart != '0') {
         numberInWords += integerWords;
-        numberInWords += language == Language.nepali ? ' रुपैंया' : ' rupees';
+        numberInWords +=
+            language == NumberToWordsLanguage.nepali ? ' रुपैंया' : ' rupees';
       }
       if (fractionalWords.isNotEmpty && fractionalPart != '0') {
         if (numberInWords.isNotEmpty) {
-          numberInWords += language == Language.nepali ? ', ' : ' and ';
+          numberInWords +=
+              language == NumberToWordsLanguage.nepali ? ', ' : ' and ';
         }
         numberInWords += fractionalWords;
-        numberInWords += language == Language.nepali ? ' पैसा' : ' paisa';
+        numberInWords +=
+            language == NumberToWordsLanguage.nepali ? ' पैसा' : ' paisa';
       }
       if (numberInWords.isEmpty) {
         numberInWords = _wordForUnitNumber('0');
-        numberInWords += language == Language.nepali ? ' रुपैंया' : ' rupees';
+        numberInWords +=
+            language == NumberToWordsLanguage.nepali ? ' रुपैंया' : ' rupees';
       }
     } else {
       numberInWords = integerWords;
       if (fractionalWords.isNotEmpty) {
-        numberInWords += language == Language.nepali ? ' दशमलव ' : ' point ';
+        numberInWords +=
+            language == NumberToWordsLanguage.nepali ? ' दशमलव ' : ' point ';
         numberInWords += fractionalWords;
       }
       if (numberInWords.isEmpty) {
@@ -120,7 +125,7 @@ class NumberToWordsNepali {
 
     List<String> digitGroups = commaFormattedNumber.split(',');
 
-    List<String> counts = language == Language.nepali
+    List<String> counts = language == NumberToWordsLanguage.nepali
         ? Constants.countsNepali
         : Constants.countsEnglish;
 
@@ -158,7 +163,7 @@ class NumberToWordsNepali {
     int num = int.parse(number);
     String numberInWords = '';
 
-    if (language == Language.nepali) {
+    if (language == NumberToWordsLanguage.nepali) {
       numberInWords = Constants.unitsNepali[num];
     } else {
       if (num < 20) {
