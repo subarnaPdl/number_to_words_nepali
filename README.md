@@ -7,7 +7,7 @@ A Dart library to convert numbers to their Nepali word representations.
 In your pubspec.yaml
 ```yaml
 dependencies:
-  number_to_words_nepali: ^1.1.0
+  number_to_words_nepali: ^1.2.0
 ```
 
 ## Usage
@@ -24,12 +24,12 @@ print('"1234567.89": ${NumberToWordsNepali(
 // "1234567.89": बाह्र लाख चौँतीस हजार पाँच सय सतसट्ठी रुपैंया, उनान्नब्बे पैसा
 
 print('123456789: ${NumberToWordsNepali(
-  language: Language.english,
+  language: NumberToWordsLanguage.english,
 ).convertNumberToWordsNepali(123456789)}');
 // 123456789: twelve crore thirty-four lakh fifty-six thousand seven hundred eighty-nine
 
 print('"1234567.89": ${NumberToWordsNepali(
-  language: Language.english,
+  language: NumberToWordsLanguage.english,
   isMonetary: true,
 ).convertNumberToWordsNepali("1234567.89")}');
 // "1234567.89": twelve lakh thirty-four thousand five hundred sixty-seven rupees and eighty-nine paisa

@@ -1,3 +1,8 @@
+# 1.2.0
+* Corrected conversion for tens-digits
+* **Breaking**: Renamed `Language` to `NumberToWordsLanguage`.
+* **Breaking**: Renamed `LetterCase` to `NumberToWordsLetterCase`.
+
 # 1.1.0
 * Added monetary conversion feature.
 * Implemented letter case conversion.
