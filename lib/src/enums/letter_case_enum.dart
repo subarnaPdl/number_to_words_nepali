@@ -2,7 +2,7 @@
 ///
 /// This enum defines the letter cases for which the NumberToWordsNepali class can convert
 /// numbers to their word representations.
-enum LetterCase {
+enum NumberToWordsLetterCase {
   /// Represents the `UPPERCASE` letter case.
   upperCase,
 

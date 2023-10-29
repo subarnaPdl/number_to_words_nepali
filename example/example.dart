@@ -38,13 +38,13 @@ void main() {
 
   print('"100001": ${NumberToWordsNepali(
     language: NumberToWordsLanguage.english,
-    letterCase: LetterCase.titleCase,
+    letterCase: NumberToWordsLetterCase.titleCase,
   ).convertNumberToWordsNepali("100001")}');
   // "100001": One Lakh One
 
   print('111111.11: ${NumberToWordsNepali(
     language: NumberToWordsLanguage.english,
-    letterCase: LetterCase.sentenceCase,
+    letterCase: NumberToWordsLetterCase.sentenceCase,
   ).convertNumberToWordsNepali(111111.11)}');
   // 111111.11: One lakh eleven thousand one hundred eleven point one one
 
@@ -54,7 +54,7 @@ void main() {
   print('1000: ${NumberToWordsNepali(
     language: NumberToWordsLanguage.english,
     isMonetary: true,
-    letterCase: LetterCase.upperCase,
+    letterCase: NumberToWordsLetterCase.upperCase,
   ).convertNumberToWordsNepali(1000)}');
   // 1000: ONE THOUSAND RUPEES
 

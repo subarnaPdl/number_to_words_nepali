@@ -7,7 +7,7 @@ class NumberToWordsNepali {
   final NumberToWordsLanguage language;
 
   /// Specifies the letter case for the converted words.
-  final LetterCase letterCase;
+  final NumberToWordsLetterCase letterCase;
 
   /// Specifies whether the conversion should include monetary units (rupees and paisa).
   final bool isMonetary;
@@ -15,11 +15,11 @@ class NumberToWordsNepali {
   /// Creates an instance of the [NumberToWordsNepali] class.
   ///
   /// - [language]: The target language for the conversion. Default is [NumberToWordsLanguage.nepali].
-  /// - [letterCase]: The desired letter case for the converted words. Default is  [LetterCase.lowerCase].
+  /// - [letterCase]: The desired letter case for the converted words. Default is  [NumberToWordsLetterCase.lowerCase].
   /// - [isMonetary]: Indicates if the conversion is for monetary values. Default is `false`.
   NumberToWordsNepali({
     this.language = NumberToWordsLanguage.nepali,
-    this.letterCase = LetterCase.lowerCase,
+    this.letterCase = NumberToWordsLetterCase.lowerCase,
     this.isMonetary = false,
   });
 
@@ -202,11 +202,11 @@ class NumberToWordsNepali {
   /// Converts the letter case.
   String _convertCase(String numberInWords) {
     switch (letterCase) {
-      case LetterCase.lowerCase:
+      case NumberToWordsLetterCase.lowerCase:
         return numberInWords.toLowerCase();
-      case LetterCase.upperCase:
+      case NumberToWordsLetterCase.upperCase:
         return numberInWords.toUpperCase();
-      case LetterCase.titleCase:
+      case NumberToWordsLetterCase.titleCase:
         return numberInWords.split(' ').map((word) {
           if (word.isNotEmpty) {
             return word[0].toUpperCase() + word.substring(1).toLowerCase();
@@ -214,7 +214,7 @@ class NumberToWordsNepali {
             return '';
           }
         }).join(' ');
-      case LetterCase.sentenceCase:
+      case NumberToWordsLetterCase.sentenceCase:
         return numberInWords.trimLeft()[0].toUpperCase() +
             numberInWords.trimLeft().substring(1).toLowerCase();
       default:
