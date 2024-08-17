@@ -1,3 +1,7 @@
+# 1.3.0
+* Added support for custom primary and secondary units.
+* Added support for custom separator.
+
 # 1.2.0
 * Corrected conversion for tens-digits
 * **Breaking**: Renamed `Language` to `NumberToWordsLanguage`.

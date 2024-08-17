@@ -1,6 +1,6 @@
 name: number_to_words_nepali
 description: A Dart library to convert numbers to their Nepali word representations.
-version: 1.2.0
+version: 1.3.0
 repository: https://github.com/subarnaPdl/number_to_words_nepali
 homepage: https://subarnapdl.com.np
 
