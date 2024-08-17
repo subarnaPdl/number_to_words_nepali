@@ -6,5 +6,7 @@
 /// - `letter_case_enum.dart`: Contains the enumeration of letter cases for the converted
 ///   words, such as uppercase, lowercase, title case or sentence case.
 ///
+library;
+
 export 'language_enum.dart';
 export 'letter_case_enum.dart';
